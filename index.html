@@ -8,26 +8,58 @@
   </head>
 
   <body>
-    <button id="toggleDarkMode">Toggle Dark Mode</button>
-    <input type="file" id="gameFileInput" />
-    <textarea id="outputArea" rows="20" cols="60" readonly></textarea>
-    <br />
-    <textarea
-      id="inputArea"
-      rows="2"
-      cols="60"
-      placeholder="Enter your action..."
-    ></textarea>
-    <br />
-    <button onclick="processInput()">Send</button>
+    <main>
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="theme-checkbox">
+          <input type="checkbox" id="theme-checkbox" />
+          <div class="slider round">
+            <span class="icon sun">☀️</span>
+            <span class="icon moon">🌙</span>
+          </div>
+        </label>
+      </div>
+
+      <label for="gameFileInput" id="uploadLabel" class="custom-file-upload">
+        Upload Game File
+      </label>
+      <input type="file" id="gameFileInput" accept=".json" />
+      <div id="fileName"></div>
+
+      <textarea id="outputArea" rows="20" cols="60" readonly></textarea>
+      <br />
+      <textarea
+        id="inputArea"
+        rows="2"
+        cols="60"
+        placeholder="Enter your action..."
+      ></textarea>
+      <br />
+      <button onclick="processInput()">Send</button>
+    </main>
 
     <script src="./scripts/game.js" type="module"></script>
     <script>
-      const toggleButton = document.getElementById('toggleDarkMode');
-      const body = document.body;
+      const darkModeToggle = document.getElementById('theme-checkbox');
 
-      toggleButton.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
+      darkModeToggle.addEventListener('change', function () {
+        if (this.checked) {
+          document.body.classList.add('dark-mode');
+          localStorage.setItem('dark-mode', 'dark');
+        } else {
+          document.body.classList.remove('dark-mode');
+          localStorage.setItem('dark-mode', 'light');
+        }
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('dark-mode');
+
+        if (savedTheme === 'dark') {
+          document.body.classList.add('dark-mode');
+          darkModeToggle.checked = true;
+        } else if (savedTheme === 'light') {
+          document.body.classList.remove('dark-mode');
+        }
       });
     </script>
   </body>

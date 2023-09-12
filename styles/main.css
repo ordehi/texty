@@ -1,6 +1,19 @@
 body {
   font-family: 'Arial', sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  position: relative;
+  width: 80%;
+  max-width: 800px; /* This can be adjusted based on your requirements */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,11 +21,12 @@ body {
   box-sizing: border-box;
 }
 
+
 textarea,
 button {
   margin: 10px 0;
   padding: 10px;
-  width: 80%;
+  width: 100%;
   max-width: 600px;
   font-size: 1.1rem;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -47,4 +61,113 @@ button.dark-mode, .dark-mode textarea {
 
 .dark-mode button:hover {
   background-color: #383838;  /* Slightly lighter on hover for better UX */
+}
+
+#gameFileInput {
+  display: none;
+}
+
+.custom-file-upload {
+  padding: 10px 15px;
+  border: 2px solid #333;
+  border-radius: 5px;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #f4f4f4;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+.custom-file-upload:hover {
+  background-color: #e4e4e4;
+}
+
+.theme-switch-wrapper {
+  position: absolute;
+  top: 10px;  /* Adjust based on where you want it to sit from the top edge */
+  left: 28px; /* Adjust based on where you want it to sit from the left edge */
+}
+
+
+.theme-switch {
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 48px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ddd;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 16px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 16px;
+}
+
+input:checked + .slider {
+  background-color: #444;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.slider:before {
+  z-index: 2;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.icon {
+  position: absolute;
+  font-size: 16px; 
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1; 
+  width: 24px; /* Match the slider's height */
+  text-align: center; 
+  line-height: 24px; 
+}
+
+.icon.sun {
+  left: -28px;  /* This will place it just to the left of the slider */
+  opacity: 1;  
+}
+
+.icon.moon {
+  right: -28px;  /* This will place it just to the right of the slider */
+  opacity: 0.3;  
+}
+
+input:checked + .slider .icon.sun {
+  opacity: 0.3;
+}
+
+input:checked + .slider .icon.moon {
+  opacity: 1;
 }
