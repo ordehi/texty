@@ -4,6 +4,11 @@ class GameState {
     this.currentLocation = null; // Player's current location
     this.inventory = []; // Player's inventory
     this.globalEvents = {}; // Track major game events (e.g., whether a boss is defeated)
+    this.messageLog = [];
+  }
+
+  addMessage(message) {
+    this.messageLog.push(message);
   }
 
   addLocation(key, location) {

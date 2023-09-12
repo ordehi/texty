@@ -1,20 +1,15 @@
-function go(direction) {
-  // Here, `locations` is a hypothetical data structure storing adjacent locations.
-  const locations = {
-    north: 'The Forest',
-    south: 'The Beach',
-    // ... other directions
-  };
+function go(params, gameState) {
+  const direction = params[0];
+  const currentLocation = gameState.currentLocation;
 
-  const newLocation = locations[direction];
-
-  if (newLocation) {
-    console.log(`You moved to ${newLocation}`);
-    // Update the player's current location
-    currentPlayerLocation = newLocation;
+  if (currentLocation.exits[direction]) {
+    gameState.currentLocation = currentLocation.exits[direction].location;
+    gameState.addMessage(`You move to the ${gameState.currentLocation.name}`);
   } else {
-    console.log(`You can't go that way.`);
+    gameState.addMessage('You cannot go that way.');
   }
+
+  return gameState;
 }
 
 export default go;

@@ -1,4 +1,4 @@
-import interactionsMixin from '../mixins/interactionsMixin';
+import interactionsMixin from '../mixins/interactionsMixin.js';
 
 class Interactable {
   constructor(itemName, itemDescription) {

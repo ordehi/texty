@@ -1,9 +1,10 @@
-import examine from './examine';
-import get from './get';
-import go from './go';
-import inputFailed from './inputFailed';
-import inventory from './inventory';
-import use from './use';
+import examine from './examine.js';
+import get from './get.js';
+import go from './go.js';
+import inputFailed from './inputFailed.js';
+import inventory from './inventory.js';
+import look from './look.js';
+import use from './use.js';
 
 const actions = {
   examine,
@@ -11,6 +12,7 @@ const actions = {
   go,
   inputFailed,
   inventory,
+  look,
   use,
 };
 

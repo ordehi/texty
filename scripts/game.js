@@ -1,6 +1,7 @@
 import GameState from './classes/GameState.js';
 import Location from './classes/Location.js';
 import Interactable from './classes/Interactable.js';
+import actions from './actions/actionsExport.js';
 
 // Game State
 const gameState = new GameState();
@@ -22,60 +23,50 @@ function initGame() {
   gameState.currentLocation = room;
 
   // Initial message
-  gameState.messageLog.push(
+  gameState.addMessage(
     "You wake up in a dimly lit room. You don't remember how you got here."
   );
 }
 
+// Update the display with the current game state
+function renderGameState() {
+  const outputArea = document.getElementById('outputArea');
+
+  // Append the latest message to the output
+  outputArea.value +=
+    gameState.messageLog[gameState.messageLog.length - 1] + '\n';
+
+  // Optionally, scroll the textarea to the bottom to always show the latest message
+  outputArea.scrollTop = outputArea.scrollHeight;
+}
+3;
+
+function processInput(action, params) {
+  return actions[action](params, gameState);
+}
+
 // Main game loop
 function gameLoop(input) {
-  // Process input (This could be more detailed, using regex or other methods to parse player input)
   const [action, ...params] = input.split(' ');
-
-  switch (action.toLowerCase()) {
-    case 'go':
-      handleGoAction(params[0]); // params[0] would be the direction, e.g., "north"
-      break;
-    case 'get':
-      handleGetAction(params.join(' ')); // join the rest of the params to get item name
-      break;
-    case 'examine':
-      handleExamineAction(params.join(' '));
-      break;
-    case 'inventory':
-      handleInventoryAction();
-      break;
-    case 'use':
-      handleUseAction(params.join(' '));
-      break;
-    default:
-      gameState.messageLog.push("Sorry, I don't understand that command.");
-  }
+  processInput(action, params);
 
   // Render game state to the UI (pseudo code)
   renderGameState();
 }
 
-// Sample action handlers
-function handleGoAction(direction) {
-  // Logic for moving between locations
-}
+// Handle the input from the user
+document.getElementById('inputArea').addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    // Prevent the newline from being added to the textarea
+    event.preventDefault();
 
-function handleGetAction(itemName) {
-  // Logic for picking up items
-}
+    const input = event.target.value;
+    gameLoop(input);
 
-function handleExamineAction(subject) {
-  // Logic for examining items or locations
-}
-
-function handleInventoryAction() {
-  // Logic for showing player's inventory
-}
-
-function handleUseAction(itemName) {
-  // Logic for using items
-}
+    // Optionally, clear the input for the next command
+    event.target.value = '';
+  }
+});
 
 // Game entry point
 initGame();

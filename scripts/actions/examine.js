@@ -1,16 +1,17 @@
-function examine(object) {
-  const descriptions = {
-    sword: 'A shiny, sharp blade.',
-    beach: 'Golden sands stretch out before you.',
-    // ... other objects and locations
-  };
+function examine(params, gameState) {
+  const target = params[0];
 
-  const description = descriptions[object];
-
-  if (description) {
-    console.log(description);
+  if (gameState.inventory.some((item) => item.noun === target)) {
+    gameState.addMessage(`You examine the ${target}. ${item.description}`);
+  } else if (gameState.currentLocation.interactables[target]) {
+    gameState.addMessage(
+      `You examine the ${target}. ${gameState.currentLocation.interactables[target].description}`
+    );
   } else {
-    console.log(`You don't see anything special about the ${object}.`);
+    gameState.addMessage(`You don't see a ${target} here.`);
   }
+
+  return gameState;
 }
+
 export default examine;

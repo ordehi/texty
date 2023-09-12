@@ -1,5 +1,5 @@
-import exitsMixin from '../mixins/exitsMixin';
-import interactablesMixin from '../mixins/interactablesMixin';
+import exitsMixin from '../mixins/exitsMixin.js';
+import interactablesMixin from '../mixins/interactablesMixin.js';
 
 class Location {
   constructor(locationName, locationDescription) {

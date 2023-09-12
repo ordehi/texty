@@ -1,11 +1,16 @@
-function get(item) {
-  // Assume `currentLocationItems` contains items in the current location.
-  if (currentLocationItems.includes(item)) {
-    playerInventory.push(item);
-    console.log(`You took the ${item}`);
+function get(params, gameState) {
+  const itemKey = params[0];
+  const currentLocation = gameState.currentLocation;
+
+  if (currentLocation.interactables[itemKey]) {
+    gameState.inventory.push(currentLocation.interactables[itemKey]);
+    delete currentLocation.interactables[itemKey];
+    gameState.addMessage(`You took the ${itemKey}.`);
   } else {
-    console.log(`There's no ${item} here.`);
+    gameState.addMessage(`There is no ${itemKey} here.`);
   }
+
+  return gameState;
 }
 
 export default get;
