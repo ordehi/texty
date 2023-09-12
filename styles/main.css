@@ -43,6 +43,14 @@ textarea {
   resize: none;
 }
 
+#outputArea {
+  outline: none;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
 body.dark-mode {
   background-color: #181818;
   color: #e0e0e0;

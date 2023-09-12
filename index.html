@@ -26,12 +26,13 @@
       <div id="fileName">Game:</div>
 
       <textarea id="outputArea" rows="20" cols="60" readonly></textarea>
-      <br />
       <textarea
         id="inputArea"
         rows="2"
         cols="60"
-        placeholder="Enter your action..."
+        placeholder="Enter an action..."
+        disabled
+        class="disabled"
       ></textarea>
       <br />
       <button onclick="processInput()">Send</button>

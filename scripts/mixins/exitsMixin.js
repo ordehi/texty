@@ -2,7 +2,6 @@ function exitsMixin(obj) {
   obj.exits = {};
 
   obj.addExit = function (exitKey, exitDescription, location) {
-    console.log(exitKey, exitDescription, location);
     if (!this.exits[exitKey]) {
       this.exits[exitKey] = {
         description: exitDescription,

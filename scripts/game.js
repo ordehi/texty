@@ -6,9 +6,12 @@ import actions from './actions/actionsExport.js';
 // Game State
 const gameState = new GameState();
 
-function renderGameState() {
-  const outputArea = document.getElementById('outputArea');
+const outputArea = document.getElementById('outputArea');
+const inputArea = document.getElementById('inputArea');
+const gameFileInput = document.getElementById('gameFileInput');
+const fileNameDisplay = document.getElementById('fileName');
 
+function renderGameState() {
   // Start from the message after the last rendered one
   for (
     let i = gameState.lastRenderedIndex + 1;
@@ -56,7 +59,8 @@ function gameLoop(input) {
 }
 
 // Handle the input from the user
-document.getElementById('inputArea').addEventListener('keydown', (event) => {
+
+inputArea.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     // Prevent the newline from being added to the textarea
     event.preventDefault();
@@ -68,6 +72,11 @@ document.getElementById('inputArea').addEventListener('keydown', (event) => {
     event.target.value = '';
   }
 });
+
+function enableInput() {
+  inputArea.disabled = false;
+  inputArea.classList.remove('disabled');
+}
 
 function initGameFromJSON(gameData) {
   // Clear the current game state
@@ -124,12 +133,10 @@ function initGameFromJSON(gameData) {
   // Initial message
   gameState.addMessage(gameData.initialMessage);
 
+  enableInput();
   // Render the game state to show the initial message
   renderGameState();
 }
-
-const gameFileInput = document.getElementById('gameFileInput');
-const fileNameDisplay = document.getElementById('fileName');
 
 gameFileInput.addEventListener('change', function (event) {
   const file = event.target.files[0];
