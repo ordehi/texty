@@ -83,6 +83,10 @@ button.dark-mode, .dark-mode textarea {
   background-color: #e4e4e4;
 }
 
+#fileName {
+  padding-top: 10px;
+}
+
 .theme-switch-wrapper {
   position: absolute;
   top: 10px;  /* Adjust based on where you want it to sit from the top edge */

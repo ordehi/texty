@@ -1,4 +1,5 @@
 {
+  "game": "Example Adventure",
   "locations": {
     "Room": {
       "description": "A small dimly lit room.",

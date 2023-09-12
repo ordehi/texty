@@ -132,15 +132,12 @@ const gameFileInput = document.getElementById('gameFileInput');
 const fileNameDisplay = document.getElementById('fileName');
 
 gameFileInput.addEventListener('change', function (event) {
-  if (this.files && this.files.length > 0) {
-    fileNameDisplay.textContent = `Selected: ${this.files[0].name}`;
-  }
-
   const file = event.target.files[0];
   const reader = new FileReader();
 
   reader.onload = function (event) {
     const gameData = JSON.parse(event.target.result);
+    fileNameDisplay.textContent = `Game: ${gameData.game}`;
     initGameFromJSON(gameData);
   };
 
