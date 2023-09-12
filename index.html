@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text-based Game</title>
+  </head>
+
+  <body>
+    <textarea id="displayArea" rows="20" cols="60" readonly></textarea>
+    <br />
+    <textarea
+      id="inputArea"
+      rows="2"
+      cols="60"
+      placeholder="Enter your action..."
+    ></textarea>
+    <br />
+    <button onclick="processInput()">Send</button>
+
+    <script src="./scripts/game.js"></script>
+  </body>
+</html>
