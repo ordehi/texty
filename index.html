@@ -19,6 +19,8 @@
         </label>
       </div>
 
+      <button id="toggleGameManagement">Manage Games</button>
+
       <div class="game-management">
         <div class="game-selection">
           <select id="gameSelect">
@@ -77,6 +79,16 @@
         } else if (savedTheme === 'light') {
           document.body.classList.remove('dark-mode');
         }
+      });
+
+      // Toggle the game-management visibility
+      const gameManagement = document.querySelector('.game-management');
+      const toggleGameManagementBtn = document.getElementById(
+        'toggleGameManagement'
+      );
+
+      toggleGameManagementBtn.addEventListener('click', function () {
+        gameManagement.classList.toggle('visible');
       });
     </script>
   </body>

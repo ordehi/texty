@@ -21,6 +21,11 @@ main, header {
   box-sizing: border-box;
 }
 
+header {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 textarea,
 button {
   margin: 10px 0;
@@ -69,11 +74,24 @@ body.dark-mode {
   background-color: #383838;
 }
 
+#toggleGameManagement {
+  width: fit-content;
+}
+
 .game-management {
-  display: flex;
+  display: none;
   flex-direction: column;
   position: relative;
   box-sizing: border-box
+}
+
+.game-management.visible {
+  display: flex;
+  position: absolute;
+  top: 46px;
+  z-index: 1000;
+  background-color: black;
+  padding: 16px;
 }
 
 .game-selection {
@@ -123,6 +141,7 @@ button:hover, #loadGameBtn:hover, .custom-file-upload:hover {
   align-self: start;
   position: relative;
   top: 10px;
+  margin-bottom: 10px;
 }
 
 .theme-switch {
