@@ -2,6 +2,7 @@ import GameState from './classes/GameState.js';
 import Location from './classes/Location.js';
 import Interactable from './classes/Interactable.js';
 import actions from './actions/actionsExport.js';
+import { initializeGameSelection } from './ui.js';
 
 // Game State
 const gameState = new GameState();
@@ -90,6 +91,7 @@ function enableInput() {
 function initGameFromJSON(gameData) {
   // Clear the current game state
   gameState.clear();
+  outputArea.value = '';
 
   // Create and store Interactables
   const interactables = {}; // Temporary storage to associate interactables with locations
@@ -144,6 +146,7 @@ function initGameFromJSON(gameData) {
 
   enableInput();
   // Render the game state to show the initial message
+  fileNameDisplay.textContent = `Game: ${gameData.game}`;
   renderGameState();
 }
 
@@ -153,9 +156,10 @@ gameFileInput.addEventListener('change', function (event) {
 
   reader.onload = function (event) {
     const gameData = JSON.parse(event.target.result);
-    fileNameDisplay.textContent = `Game: ${gameData.game}`;
     initGameFromJSON(gameData);
   };
 
   reader.readAsText(file);
 });
+
+initializeGameSelection(initGameFromJSON);

@@ -7,20 +7,19 @@ body, html {
   height: 100%;
   margin: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
-main {
+main, header {
   position: relative;
   width: 80%;
-  max-width: 800px; /* This can be adjusted based on your requirements */
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2%;
   box-sizing: border-box;
 }
-
 
 textarea,
 button {
@@ -56,19 +55,49 @@ body.dark-mode {
   color: #e0e0e0;
 }
 
-button.dark-mode, .dark-mode textarea {
-  background-color: #282828;  /* Darker than body but still visible */
-  border: 1px solid #444;
-  color: #e0e0e0; /* Light color for text to ensure readability */
-  resize: none; /* Disable manual resizing */
+.dark-mode button, .dark-mode textarea, .dark-mode .custom-file-upload, .dark-mode #loadGameBtn {
+  background-color: #282828; 
+  color: #e0e0e0;
+  resize: none;
 }
 
 .dark-mode textarea::placeholder {
-  color: #777; /* Slightly dimmer placeholder text for contrast */
+  color: #777;
 }
 
-.dark-mode button:hover {
-  background-color: #383838;  /* Slightly lighter on hover for better UX */
+.dark-mode button:hover, .dark-mode .custom-file-upload:hover, .dark-mode #loadGameBtn:hover {
+  background-color: #383838;
+}
+
+.game-management {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box
+}
+
+.game-selection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.game-upload {
+  display: flex;
+  gap: 20px;
+}
+
+#gameSelect {
+  padding: 5px 10px;
+  font-size: 1.1rem;
+}
+
+#loadGameBtn, .custom-file-upload {
+  padding: 5px 15px;
+  cursor: pointer;
+  background-color: #f4f4f4;
+  border: none;
+  transition: background-color 0.3s ease;
 }
 
 #gameFileInput {
@@ -77,17 +106,12 @@ button.dark-mode, .dark-mode textarea {
 
 .custom-file-upload {
   padding: 10px 15px;
-  border: 2px solid #333;
-  border-radius: 5px;
   display: inline-block;
   cursor: pointer;
   background-color: #f4f4f4;
-  font-weight: bold;
-  color: #333;
-  text-align: center;
 }
 
-.custom-file-upload:hover {
+button:hover, #loadGameBtn:hover, .custom-file-upload:hover {
   background-color: #e4e4e4;
 }
 
@@ -96,11 +120,10 @@ button.dark-mode, .dark-mode textarea {
 }
 
 .theme-switch-wrapper {
-  position: absolute;
-  top: 10px;  /* Adjust based on where you want it to sit from the top edge */
-  left: 28px; /* Adjust based on where you want it to sit from the left edge */
+  align-self: start;
+  position: relative;
+  top: 10px;
 }
-
 
 .theme-switch {
   display: inline-block;
@@ -161,18 +184,18 @@ input:checked + .slider:before {
   top: 50%;
   transform: translateY(-50%);
   z-index: 1; 
-  width: 24px; /* Match the slider's height */
+  width: 24px;
   text-align: center; 
   line-height: 24px; 
 }
 
 .icon.sun {
-  left: -28px;  /* This will place it just to the left of the slider */
+  left: -28px;
   opacity: 1;  
 }
 
 .icon.moon {
-  right: -28px;  /* This will place it just to the right of the slider */
+  right: -28px;
   opacity: 0.3;  
 }
 

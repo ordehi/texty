@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <main>
+    <header>
       <div class="theme-switch-wrapper">
         <label class="theme-switch" for="theme-checkbox">
           <input type="checkbox" id="theme-checkbox" />
@@ -19,12 +19,29 @@
         </label>
       </div>
 
-      <label for="gameFileInput" id="uploadLabel" class="custom-file-upload">
-        Upload Game File
-      </label>
-      <input type="file" id="gameFileInput" accept=".json" />
-      <div id="fileName">Game:</div>
-
+      <div class="game-management">
+        <div class="game-selection">
+          <select id="gameSelect">
+            <option value="" disabled selected>Please select a game</option>
+            <!-- Other options will be populated dynamically using JavaScript -->
+          </select>
+          <button id="loadGameBtn" disabled>Load</button>
+        </div>
+        <div style="margin: 10px 0">OR</div>
+        <div class="game-upload">
+          <label
+            for="gameFileInput"
+            id="uploadLabel"
+            class="custom-file-upload"
+          >
+            Upload Game File
+          </label>
+          <input type="file" id="gameFileInput" accept=".json" />
+          <div id="fileName">Game:</div>
+        </div>
+      </div>
+    </header>
+    <main>
       <textarea id="outputArea" rows="20" cols="60" readonly></textarea>
       <textarea
         id="inputArea"
