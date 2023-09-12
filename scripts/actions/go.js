@@ -1,15 +1,26 @@
-function go(params, gameState) {
-  const direction = params[0];
+function go(direction, gameState) {
   const currentLocation = gameState.currentLocation;
+  let message = '';
 
-  if (currentLocation.exits[direction]) {
-    gameState.currentLocation = currentLocation.exits[direction].location;
-    gameState.addMessage(`You move to the ${gameState.currentLocation.name}`);
+  // Check if the direction exists in the currentLocation's exits
+  if (
+    currentLocation &&
+    'exits' in currentLocation &&
+    currentLocation.exits[direction]
+  ) {
+    const targetLocation = currentLocation.exits[direction].location;
+
+    if (targetLocation) {
+      gameState.changeLocation(targetLocation.name);
+      message = `You move to the ${targetLocation.name}.`;
+    } else {
+      message = `The way to the ${direction} is blocked or doesn't lead anywhere.`;
+    }
   } else {
-    gameState.addMessage('You cannot go that way.');
+    message = `There's no exit to the ${direction}.`;
   }
 
-  return gameState;
+  return message;
 }
 
 export default go;

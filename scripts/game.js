@@ -6,6 +6,29 @@ import actions from './actions/actionsExport.js';
 // Game State
 const gameState = new GameState();
 
+function renderGameState() {
+  const outputArea = document.getElementById('outputArea');
+
+  // Start from the message after the last rendered one
+  for (
+    let i = gameState.lastRenderedIndex + 1;
+    i < gameState.messageLog.length;
+    i++
+  ) {
+    // If the message starts with the prompt, add an extra newline before it.
+    if (gameState.messageLog[i].startsWith('->')) {
+      outputArea.value += '\n';
+    }
+    outputArea.value += gameState.messageLog[i] + '\n';
+  }
+
+  // Update the last rendered index
+  gameState.lastRenderedIndex = gameState.messageLog.length - 1;
+
+  // Scroll the textarea to the bottom to always show the latest messages
+  outputArea.scrollTop = outputArea.scrollHeight;
+}
+
 // Initialize game locations and interactables
 function initGame() {
   // Define Interactables
@@ -26,29 +49,31 @@ function initGame() {
   gameState.addMessage(
     "You wake up in a dimly lit room. You don't remember how you got here."
   );
+
+  renderGameState();
 }
 
-// Update the display with the current game state
-function renderGameState() {
-  const outputArea = document.getElementById('outputArea');
+function processInput(action, params, gameState) {
+  // Add the user input to the messageLog
+  gameState.addMessage(`-> ${action} ${params.join(' ')}`);
 
-  // Append the latest message to the output
-  outputArea.value +=
-    gameState.messageLog[gameState.messageLog.length - 1] + '\n';
+  // Execute the action and capture the result
+  const actionFunction = actions[action];
 
-  // Optionally, scroll the textarea to the bottom to always show the latest message
-  outputArea.scrollTop = outputArea.scrollHeight;
-}
-3;
-
-function processInput(action, params) {
-  return actions[action](params, gameState);
+  if (actionFunction) {
+    const response = actionFunction(params, gameState);
+    if (response) {
+      gameState.addMessage(response);
+    }
+  } else {
+    gameState.addMessage(`I don't know how to "${action}".`);
+  }
 }
 
 // Main game loop
 function gameLoop(input) {
   const [action, ...params] = input.split(' ');
-  processInput(action, params);
+  processInput(action, params, gameState);
 
   // Render game state to the UI (pseudo code)
   renderGameState();

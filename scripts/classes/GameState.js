@@ -5,6 +5,7 @@ class GameState {
     this.inventory = []; // Player's inventory
     this.globalEvents = {}; // Track major game events (e.g., whether a boss is defeated)
     this.messageLog = [];
+    this.lastRenderedIndex = -1;
   }
 
   addMessage(message) {

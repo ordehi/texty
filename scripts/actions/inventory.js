@@ -1,13 +1,15 @@
 function inventory(_, gameState) {
   // Notice the _ since we don't need params here
+  let message = '';
+
   if (gameState.inventory.length > 0) {
     const items = gameState.inventory.map((item) => item.noun).join(', ');
-    gameState.addMessage(`You have: ${items}`);
+    message = `You have: ${items}`;
   } else {
-    gameState.addMessage('Your inventory is empty.');
+    message = 'Your inventory is empty.';
   }
 
-  return gameState;
+  return message;
 }
 
 export default inventory;

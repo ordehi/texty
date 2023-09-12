@@ -2,8 +2,7 @@ function look(params, gameState) {
   const currentLocation = gameState.currentLocation;
 
   if (!currentLocation || !currentLocation.interactables) {
-    gameState.addMessage('You see nothing special.');
-    return gameState;
+    return 'You see nothing special.';
   }
 
   let message = currentLocation.description;
@@ -26,7 +25,7 @@ function look(params, gameState) {
     message += `\nThere are no items here.`;
   }
 
-  gameState.addMessage(message);
+  return message;
 }
 
 export default look;

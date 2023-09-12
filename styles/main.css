@@ -1,0 +1,50 @@
+body {
+  font-family: 'Arial', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+  box-sizing: border-box;
+}
+
+textarea,
+button {
+  margin: 10px 0;
+  padding: 10px;
+  width: 80%;
+  max-width: 600px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+textarea {
+  border: 1px solid #bbb;
+  resize: none;
+}
+
+body.dark-mode {
+  background-color: #181818;
+  color: #e0e0e0;
+}
+
+button.dark-mode, .dark-mode textarea {
+  background-color: #282828;  /* Darker than body but still visible */
+  border: 1px solid #444;
+  color: #e0e0e0; /* Light color for text to ensure readability */
+  resize: none; /* Disable manual resizing */
+}
+
+.dark-mode textarea::placeholder {
+  color: #777; /* Slightly dimmer placeholder text for contrast */
+}
+
+.dark-mode button:hover {
+  background-color: #383838;  /* Slightly lighter on hover for better UX */
+}

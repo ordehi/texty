@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Text-based Game</title>
+    <link rel="stylesheet" href="./styles/main.css" />
   </head>
 
   <body>
+    <button id="toggleDarkMode">Toggle Dark Mode</button>
     <textarea id="outputArea" rows="20" cols="60" readonly></textarea>
     <br />
     <textarea
@@ -19,5 +21,13 @@
     <button onclick="processInput()">Send</button>
 
     <script src="./scripts/game.js" type="module"></script>
+    <script>
+      const toggleButton = document.getElementById('toggleDarkMode');
+      const body = document.body;
+
+      toggleButton.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+      });
+    </script>
   </body>
 </html>
