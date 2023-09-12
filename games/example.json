@@ -1,0 +1,25 @@
+{
+  "locations": {
+    "Room": {
+      "description": "A small dimly lit room.",
+      "exits": {
+        "north": "Hallway"
+      },
+      "interactables": ["Key"]
+    },
+    "Hallway": {
+      "description": "A long, dark hallway.",
+      "exits": {
+        "south": "Room"
+      },
+      "interactables": []
+    }
+  },
+  "interactables": {
+    "Key": {
+      "description": "A rusty old key"
+    }
+  },
+  "startingLocation": "Room",
+  "initialMessage": "You wake up in a dimly lit room. You don't remember how you got here."
+}

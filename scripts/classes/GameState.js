@@ -4,16 +4,16 @@ class GameState {
     this.currentLocation = null; // Player's current location
     this.inventory = []; // Player's inventory
     this.globalEvents = {}; // Track major game events (e.g., whether a boss is defeated)
-    this.messageLog = [];
-    this.lastRenderedIndex = -1;
-  }
-
-  addMessage(message) {
-    this.messageLog.push(message);
+    this.messageLog = []; // Log of all messages
+    this.lastRenderedIndex = -1; // Index of the last message that was rendered
   }
 
   addLocation(key, location) {
     this.locations[key] = location;
+  }
+
+  getLocation(key) {
+    return this.locations[key];
   }
 
   changeLocation(key) {
@@ -38,6 +38,19 @@ class GameState {
 
   getGlobalEvent(eventKey) {
     return this.globalEvents[eventKey];
+  }
+
+  addMessage(message) {
+    this.messageLog.push(message);
+  }
+
+  clear() {
+    this.locations = {};
+    this.currentLocation = null;
+    this.inventory = [];
+    this.globalEvents = {};
+    this.messageLog = [];
+    this.lastRenderedIndex = -1;
   }
 
   serialize() {

@@ -93,5 +93,76 @@ document.getElementById('inputArea').addEventListener('keydown', (event) => {
   }
 });
 
+function initGameFromJSON(gameData) {
+  // Clear the current game state
+  gameState.clear();
+
+  // Create and store Interactables
+  const interactables = {}; // Temporary storage to associate interactables with locations
+  for (let itemName in gameData.interactables) {
+    const item = gameData.interactables[itemName];
+    const interactable = new Interactable(itemName, item.description);
+    interactables[itemName] = interactable;
+  }
+
+  // Create Locations
+  for (let locName in gameData.locations) {
+    const loc = gameData.locations[locName];
+    const location = new Location(locName, loc.description);
+
+    // Add exits
+    for (let exitDir in loc.exits) {
+      const exitLocName = loc.exits[exitDir];
+      location.addExit(
+        exitDir,
+        `A ${exitDir} exit to ${exitLocName}.`,
+        exitLocName
+      );
+    }
+
+    // Add interactables to the location if specified
+    if (loc.interactables) {
+      for (let itemName of loc.interactables) {
+        if (interactables[itemName]) {
+          location.addInteractable(interactables[itemName]);
+        }
+      }
+    }
+
+    // Set the location to the game state
+    gameState.addLocation(locName, location);
+  }
+
+  // Convert location names in exits to actual location objects
+  for (let locName in gameData.locations) {
+    const loc = gameState.getLocation(locName);
+    for (let exitDir in loc.exits) {
+      const exitLocName = loc.exits[exitDir].location;
+      loc.exits[exitDir].location = gameState.getLocation(exitLocName);
+    }
+  }
+
+  // Set the starting location
+  gameState.changeLocation(gameData.startingLocation);
+
+  // Initial message
+  gameState.addMessage(gameData.initialMessage);
+
+  // Render the game state to show the initial message
+  renderGameState();
+}
+
+document.getElementById('gameFileInput').addEventListener('change', (event) => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function (event) {
+    const gameData = JSON.parse(event.target.result);
+    initGameFromJSON(gameData);
+  };
+
+  reader.readAsText(file);
+});
+
 // Game entry point
-initGame();
+// initGame();

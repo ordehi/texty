@@ -1,17 +1,16 @@
 function interactablesMixin(obj) {
-  obj.Interactables = { size: 0 };
+  obj.interactables = {};
 
   obj.addInteractable = function (itemKey, item) {
-    if (!this.Interactables[itemKey]) {
-      this.Interactables[itemKey] = item;
-      this.Interactables.size++;
+    if (!this.interactables[itemKey]) {
+      this.interactables[itemKey] = item;
     } else {
       console.error('Item key already exists!');
     }
   };
 
   obj.getInteractable = function (itemKey) {
-    return this.Interactables[itemKey];
+    return this.interactables[itemKey];
   };
 }
 
