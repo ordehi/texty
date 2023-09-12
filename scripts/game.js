@@ -29,30 +29,6 @@ function renderGameState() {
   outputArea.scrollTop = outputArea.scrollHeight;
 }
 
-// Initialize game locations and interactables
-function initGame() {
-  // Define Interactables
-  const key = new Interactable('Key', 'A rusty old key');
-
-  // Define Locations
-  const room = new Location('Room', 'A small dimly lit room.');
-  const hallway = new Location('Hallway', 'A long, dark hallway.');
-  room.addExit('north', {
-    description: 'A door to the north.',
-    location: hallway,
-  });
-
-  // Define starting location
-  gameState.currentLocation = room;
-
-  // Initial message
-  gameState.addMessage(
-    "You wake up in a dimly lit room. You don't remember how you got here."
-  );
-
-  renderGameState();
-}
-
 function processInput(action, params, gameState) {
   // Add the user input to the messageLog
   gameState.addMessage(`-> ${action} ${params.join(' ')}`);
@@ -163,6 +139,3 @@ document.getElementById('gameFileInput').addEventListener('change', (event) => {
 
   reader.readAsText(file);
 });
-
-// Game entry point
-// initGame();
