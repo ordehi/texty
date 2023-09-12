@@ -8,6 +8,7 @@ const gameState = new GameState();
 
 const outputArea = document.getElementById('outputArea');
 const inputArea = document.getElementById('inputArea');
+const sendButton = document.getElementById('sendButton');
 const gameFileInput = document.getElementById('gameFileInput');
 const fileNameDisplay = document.getElementById('fileName');
 
@@ -59,23 +60,31 @@ function gameLoop(input) {
 }
 
 // Handle the input from the user
+function handleInput() {
+  const input = inputArea.value;
+  if (input) {
+    gameLoop(input);
+    inputArea.value = '';
+  }
+}
 
 inputArea.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     // Prevent the newline from being added to the textarea
     event.preventDefault();
-
-    const input = event.target.value;
-    gameLoop(input);
-
-    // Optionally, clear the input for the next command
-    event.target.value = '';
+    handleInput();
   }
+});
+
+sendButton.addEventListener('click', () => {
+  handleInput();
 });
 
 function enableInput() {
   inputArea.disabled = false;
+  sendButton.disabled = false;
   inputArea.classList.remove('disabled');
+  sendButton.classList.remove('disabled');
 }
 
 function initGameFromJSON(gameData) {
