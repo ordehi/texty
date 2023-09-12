@@ -5,7 +5,7 @@ function look(params, gameState) {
     return 'You see nothing special.';
   }
 
-  let message = `You are in the ${currentLocation.name}.`;
+  let message = `${currentLocation.name}`;
   message += `\n${currentLocation.description}\n`;
 
   // List available exits

@@ -13,6 +13,7 @@ function go(direction, gameState) {
     if (targetLocation) {
       gameState.changeLocation(targetLocation.name);
       message = `You move to the ${targetLocation.name}.`;
+      message += `\n${targetLocation.description}`;
     } else {
       message = `The way to the ${direction} is blocked or doesn't lead anywhere.`;
     }
