@@ -88,43 +88,59 @@ function enableInput() {
   sendButton.classList.remove('disabled');
 }
 
+function createInteractable(item) {
+  const { noun, textResponse, actionResponse } = item;
+  const interactable = new Interactable(noun);
+  interactable.addInteraction('textResponse', textResponse);
+  interactable.addInteraction('actionResponse', actionResponse);
+  return interactable;
+}
+
+function createLocation(loc) {
+  const { name, interactableObjects, description, exits, interactables } = loc;
+  const location = new Location(name, description);
+  for (let exitDir in exits) {
+    const exitLocName = exits[exitDir];
+    location.addExit(
+      exitDir,
+      `A ${exitDir} exit to ${exitLocName}.`,
+      exitLocName
+    );
+  }
+
+  if (interactables) {
+    for (let itemName of interactables) {
+      if (interactableObjects[itemName]) {
+        location.addInteractable(itemName, interactableObjects[itemName]);
+        console.log(location);
+      }
+    }
+  }
+
+  return location;
+}
+
 function initGameFromJSON(gameData) {
   // Clear the current game state
   gameState.clear();
   outputArea.value = '';
 
   // Create and store Interactables
-  const interactables = {}; // Temporary storage to associate interactables with locations
+  const interactableObjects = {}; // Temporary storage to associate interactables with locations
   for (let itemName in gameData.interactables) {
-    const item = gameData.interactables[itemName];
-    const interactable = new Interactable(itemName, item.description);
-    interactables[itemName] = interactable;
+    const item = { noun: itemName, ...gameData.interactables[itemName] };
+    const interactable = createInteractable(item);
+    interactableObjects[itemName] = interactable;
   }
 
   // Create Locations
   for (let locName in gameData.locations) {
-    const loc = gameData.locations[locName];
-    const location = new Location(locName, loc.description);
-
-    // Add exits
-    for (let exitDir in loc.exits) {
-      const exitLocName = loc.exits[exitDir];
-      location.addExit(
-        exitDir,
-        `A ${exitDir} exit to ${exitLocName}.`,
-        exitLocName
-      );
-    }
-
-    // Add interactables to the location if specified
-    if (loc.interactables) {
-      for (let itemName of loc.interactables) {
-        if (interactables[itemName]) {
-          location.addInteractable(interactables[itemName]);
-        }
-      }
-    }
-
+    const loc = {
+      name: locName,
+      interactableObjects,
+      ...gameData.locations[locName],
+    };
+    const location = createLocation(loc);
     // Set the location to the game state
     gameState.addLocation(locName, location);
   }

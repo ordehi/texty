@@ -1,7 +1,7 @@
 import interactionsMixin from '../mixins/interactionsMixin.js';
 
 class Interactable {
-  constructor(itemName, itemDescription) {
+  constructor(itemName, itemDescription = '') {
     this.script = 'Interactable';
     this.noun = itemName;
     this.description = itemDescription;

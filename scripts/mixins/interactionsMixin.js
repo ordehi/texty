@@ -1,12 +1,9 @@
 function interactionsMixin(obj) {
   obj.interactions = {};
 
-  obj.addInteraction = function (interactionKey, textResponse, actionResponse) {
+  obj.addInteraction = function (interactionKey, interaction) {
     if (!this.interactions[interactionKey]) {
-      this.interactions[interactionKey] = {
-        textResponse,
-        actionResponse,
-      };
+      this.interactions[interactionKey] = interaction;
     } else {
       console.error('Interaction key already exists!');
     }

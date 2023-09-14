@@ -24,10 +24,10 @@ function look(params, gameState) {
   // List interactable items
   if (
     currentLocation.interactables &&
-    currentLocation.interactables.length > 0
+    Object.keys(currentLocation.interactables).length > 0
   ) {
-    const interactableNames = currentLocation.interactables
-      .map((item) => item.noun)
+    const interactableNames = Object.keys(currentLocation.interactables)
+      .map((itemName) => `${currentLocation.interactables[itemName].noun}`)
       .join(', ');
     message += `\nYou see: ${interactableNames}`;
   } else {
