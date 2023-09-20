@@ -21,10 +21,10 @@ export async function initializeGameSelection(callback) {
   const gameFilenames = ['example.json']; // Example filenames
   for (const filename of gameFilenames) {
     try {
-      const response = await fetch(`../games/${filename}`);
+      const response = await fetch(`./games/${filename}`);
       const gameData = await response.json();
       const option = document.createElement('option');
-      option.value = `../games/${filename}`; // the path to the game
+      option.value = `./games/${filename}`; // the path to the game
       option.textContent = gameData.game;
       selectElement.appendChild(option);
     } catch (error) {
@@ -46,7 +46,7 @@ export async function initializeGameSelection(callback) {
     const selectedValue = selectElement.value;
 
     let gameData;
-    if (selectedValue.startsWith('../games/')) {
+    if (selectedValue.startsWith('./games/')) {
       // Fetch the game from the server:
       const response = await fetch(selectedValue);
       gameData = await response.json();
