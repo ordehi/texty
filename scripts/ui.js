@@ -8,7 +8,6 @@ export function initializeGameSelection(callback) {
     'toggleGameManagement'
   );
 
-  // Define toggle handler function
   const toggleHandler = (event) => {
     event.stopPropagation();
     const isVisible = gameManagement.classList.toggle('visible');
@@ -16,15 +15,9 @@ export function initializeGameSelection(callback) {
     toggleGameManagementBtn.setAttribute('aria-expanded', isVisible);
   };
 
-  // Log for debugging
-  console.log('Game management element:', gameManagement);
-  console.log('Toggle button:', toggleGameManagementBtn);
-
-  // Clear existing event listeners
   toggleGameManagementBtn.replaceWith(toggleGameManagementBtn.cloneNode(true));
   const newToggleBtn = document.getElementById('toggleGameManagement');
 
-  // Add toggle event listener
   newToggleBtn.addEventListener('click', toggleHandler);
 
   // Load games
@@ -43,7 +36,6 @@ export function initializeGameSelection(callback) {
     }
   })();
 
-  // Enable/disable load button based on selection
   gameSelect.addEventListener('change', function () {
     if (gameSelect.value) {
       loadGameBtn.disabled = false;
@@ -52,7 +44,6 @@ export function initializeGameSelection(callback) {
     }
   });
 
-  // Load game logic
   loadGameBtn.addEventListener('click', async function () {
     const selectedValue = gameSelect.value;
 
@@ -70,7 +61,6 @@ export function initializeGameSelection(callback) {
     }
   });
 
-  // Close game management when clicking outside
   window.addEventListener('click', function (event) {
     if (
       !gameManagement.contains(event.target) &&
@@ -80,7 +70,6 @@ export function initializeGameSelection(callback) {
     }
   });
 
-  // Remove and add toggle event listener
   toggleGameManagementBtn.removeEventListener('click', toggleHandler);
   toggleGameManagementBtn.addEventListener('click', toggleHandler);
 }

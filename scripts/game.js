@@ -112,7 +112,6 @@ function createLocation(loc) {
     for (let itemName of interactables) {
       if (interactableObjects[itemName]) {
         location.addInteractable(itemName, interactableObjects[itemName]);
-        console.log(location);
       }
     }
   }
