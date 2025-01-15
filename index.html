@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Text-based game application with dynamic dark mode and file upload functionality." />
     <title>Text-based Game</title>
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
 
-  <body>
+  <body data-theme="light">
     <header>
       <div class="theme-switch-wrapper">
         <label class="theme-switch" for="theme-checkbox">
@@ -19,77 +20,34 @@
         </label>
       </div>
 
-      <button id="toggleGameManagement">Manage Games</button>
+      <button id="toggleGameManagement" aria-controls="gameManagement" aria-expanded="false">Manage Games</button>
 
-      <div class="game-management">
+      <div id="gameManagement" class="game-management" role="dialog" aria-hidden="true">
         <div class="game-selection">
-          <select id="gameSelect">
+          <select id="gameSelect" aria-label="Select a game">
             <option value="" disabled selected>Please select a game</option>
-            <!-- Other options will be populated dynamically using JavaScript -->
           </select>
           <button id="loadGameBtn" disabled>Load</button>
         </div>
-        <div style="margin: 10px 0">OR</div>
+        <div class="game-management-divider">OR</div>
         <div class="game-upload">
-          <label
-            for="gameFileInput"
-            id="uploadLabel"
-            class="custom-file-upload"
-          >
-            Upload Game File
-          </label>
+          <label for="gameFileInput" id="uploadLabel" class="custom-file-upload">Upload Game File</label>
           <input type="file" id="gameFileInput" accept=".json" />
-          <div id="fileName">Game:</div>
+          <div id="fileName" role="status" aria-live="polite">Game:</div>
         </div>
       </div>
     </header>
     <main>
       <textarea id="outputArea" rows="20" cols="60" readonly></textarea>
-      <textarea
-        id="inputArea"
-        rows="2"
-        cols="60"
-        placeholder="Enter an action..."
-        disabled
-        class="disabled"
-      ></textarea>
+      <label for="inputArea" class="visually-hidden">Enter your action</label>
+      <textarea id="inputArea" rows="2" cols="60" placeholder="Enter an action..." disabled class="disabled"></textarea>
       <button id="sendButton" disabled class="disabled">Send</button>
     </main>
 
     <script src="./scripts/game.js" type="module"></script>
-    <script>
-      const darkModeToggle = document.getElementById('theme-checkbox');
-
-      darkModeToggle.addEventListener('change', function () {
-        if (this.checked) {
-          document.body.classList.add('dark-mode');
-          localStorage.setItem('dark-mode', 'dark');
-        } else {
-          document.body.classList.remove('dark-mode');
-          localStorage.setItem('dark-mode', 'light');
-        }
-      });
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const savedTheme = localStorage.getItem('dark-mode');
-
-        if (savedTheme === 'dark') {
-          document.body.classList.add('dark-mode');
-          darkModeToggle.checked = true;
-        } else if (savedTheme === 'light') {
-          document.body.classList.remove('dark-mode');
-        }
-      });
-
-      // Toggle the game-management visibility
-      const gameManagement = document.querySelector('.game-management');
-      const toggleGameManagementBtn = document.getElementById(
-        'toggleGameManagement'
-      );
-
-      toggleGameManagementBtn.addEventListener('click', function () {
-        gameManagement.classList.toggle('visible');
-      });
-    </script>
+    <script src="./scripts/theme-toggle.js"></script>
+    <noscript>
+      <p>Please enable JavaScript to use this application.</p>
+    </noscript>
   </body>
 </html>

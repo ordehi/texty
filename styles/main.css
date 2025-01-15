@@ -1,14 +1,40 @@
+/* Root variables for light and dark themes */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --button-bg: #f4f4f4;
+  --button-text: #000000;
+  --textarea-border: #bbb;
+  --placeholder-color: #aaa;
+  --hover-bg: #d8d8d8;
+  --border-radius: 8px;
+  --disabled-bg: #e0e0e0;
+  --disabled-text: #a0a0a0;
+}
+
+[data-theme="dark"] {
+  --bg-color: #181818;
+  --text-color: #e0e0e0;
+  --button-bg: #282828;
+  --button-text: #e0e0e0;
+  --textarea-border: #444;
+  --placeholder-color: #777;
+  --hover-bg: #383838;
+  --disabled-bg: #444;
+  --disabled-text: #777;
+}
+
 body {
   font-family: 'Arial', sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body, html {
+  background-color: var(--bg-color);
+  color: var(--text-color);
   height: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: var(--border-radius);
 }
 
 main, header {
@@ -19,6 +45,7 @@ main, header {
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  border-radius: var(--border-radius);
 }
 
 header {
@@ -26,52 +53,45 @@ header {
   justify-content: space-between;
 }
 
-textarea,
-button {
+textarea, button {
   margin: 10px 0;
   padding: 10px;
   width: 100%;
   max-width: 600px;
   font-size: 1.1rem;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: 1px solid var(--textarea-border);
+  border-radius: var(--border-radius);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button {
   cursor: pointer;
   border: none;
-  outline: none;
 }
 
-textarea {
-  border: 1px solid #bbb;
-  resize: none;
+textarea::placeholder {
+  color: var(--placeholder-color);
+}
+
+button:hover {
+  background-color: var(--hover-bg);
+}
+
+button:disabled {
+  background-color: var(--disabled-bg);
+  color: var(--disabled-text);
+  cursor: not-allowed;
 }
 
 #outputArea {
   outline: none;
+  border-radius: var(--border-radius);
 }
 
 .disabled {
   cursor: not-allowed;
-}
-
-body.dark-mode {
-  background-color: #181818;
-  color: #e0e0e0;
-}
-
-.dark-mode button, .dark-mode textarea, .dark-mode .custom-file-upload, .dark-mode #loadGameBtn {
-  background-color: #282828; 
-  color: #e0e0e0;
-  resize: none;
-}
-
-.dark-mode textarea::placeholder {
-  color: #777;
-}
-
-.dark-mode button:hover, .dark-mode .custom-file-upload:hover, .dark-mode #loadGameBtn:hover {
-  background-color: #383838;
 }
 
 #toggleGameManagement {
@@ -81,60 +101,82 @@ body.dark-mode {
 .game-management {
   display: none;
   flex-direction: column;
-  position: relative;
-  box-sizing: border-box
+  position: absolute;
+  top: 46px;
+  right: 10px;
+  background-color: var(--button-bg); /* Use light/dark theme variable */
+  color: var(--text-color);
+  padding: 12px 16px;
+  border: 1px solid var(--textarea-border); /* Subtle border for distinction */
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+  z-index: 1000;
 }
 
 .game-management.visible {
-  display: flex;
-  position: absolute;
-  top: 46px;
-  z-index: 1000;
-  background-color: black;
-  padding: 16px;
+  display: flex; /* Ensure this overrides display: none */
 }
 
-.game-selection {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
+.game-selection,
 .game-upload {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 8px; /* Reduce gap for better spacing */
 }
 
 #gameSelect {
-  padding: 5px 10px;
-  font-size: 1.1rem;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  border: 1px solid var(--textarea-border);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-color); /* Matches current theme */
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-#loadGameBtn, .custom-file-upload {
-  padding: 5px 15px;
-  cursor: pointer;
-  background-color: #f4f4f4;
-  border: none;
-  transition: background-color 0.3s ease;
+#gameSelect:focus {
+  outline: 2px solid var(--placeholder-color);
 }
 
-#gameFileInput {
-  display: none;
+button#loadGameBtn,
+.custom-file-upload {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: var(--border-radius);
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: 1px solid var(--textarea-border);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button#loadGameBtn:disabled {
+  background-color: var(--disabled-bg);
+  color: var(--disabled-text);
+  cursor: not-allowed;
+}
+
+button#loadGameBtn:hover:enabled,
+.custom-file-upload:hover {
+  background-color: var(--hover-bg);
 }
 
 .custom-file-upload {
-  padding: 10px 15px;
   display: inline-block;
   cursor: pointer;
-  background-color: #f4f4f4;
-}
-
-button:hover, #loadGameBtn:hover, .custom-file-upload:hover {
-  background-color: #e4e4e4;
+  text-align: center;
 }
 
 #fileName {
-  padding-top: 10px;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  color: var(--placeholder-color);
+}
+
+.game-management-divider {
+  margin: 8px 0;
+  font-size: 0.8rem;
+  color: var(--placeholder-color);
+  text-align: center;
 }
 
 .theme-switch-wrapper {
@@ -164,6 +206,7 @@ button:hover, #loadGameBtn:hover, .custom-file-upload:hover {
   right: 0;
   top: 0;
   transition: .4s;
+  border-radius: var(--border-radius);
 }
 
 .slider:before {
@@ -175,6 +218,7 @@ button:hover, #loadGameBtn:hover, .custom-file-upload:hover {
   position: absolute;
   transition: .4s;
   width: 16px;
+  border-radius: 50%;
 }
 
 input:checked + .slider {
@@ -183,18 +227,6 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(24px);
-}
-
-.slider:before {
-  z-index: 2;
-}
-
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
 }
 
 .icon {

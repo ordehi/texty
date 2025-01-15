@@ -60,3 +60,57 @@ export async function initializeGameSelection(callback) {
     }
   });
 }
+
+// Add helper function to close dropdown
+function closeDropdown() {
+  const dropdown = document.querySelector('.dropdown-content');
+  if (dropdown) {
+    dropdown.style.display = 'none';
+  }
+}
+
+// Add click listener to window
+window.addEventListener('click', (event) => {
+  if (!event.target.matches('.dropbtn')) {
+    closeDropdown();
+  }
+});
+
+// Modify load game button click handler
+document.getElementById('loadGameBtn').addEventListener('click', () => {
+  const selectedGame = document.getElementById('gameSelect').value;
+  if (selectedGame) {
+    loadGame(selectedGame);
+    closeDropdown();
+  }
+});
+
+// Modify existing dropdown button click handler
+document.querySelector('.dropbtn').addEventListener('click', (event) => {
+  const dropdown = document.querySelector('.dropdown-content');
+  dropdown.style.display =
+    dropdown.style.display === 'block' ? 'none' : 'block';
+  event.stopPropagation();
+});
+
+// Add click handler to window
+window.addEventListener('click', (event) => {
+  const gameManagement = document.querySelector('.game-management');
+  const toggleButton = document.getElementById('toggleGameManagement');
+
+  if (
+    !gameManagement.contains(event.target) &&
+    !toggleButton.contains(event.target)
+  ) {
+    gameManagement.classList.remove('visible');
+  }
+});
+
+// Modify load game handler
+document.getElementById('loadGameBtn').addEventListener('click', () => {
+  const selectedGame = document.getElementById('gameSelect').value;
+  if (selectedGame) {
+    loadGame(selectedGame);
+    document.querySelector('.game-management').classList.remove('visible');
+  }
+});
