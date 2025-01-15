@@ -21,6 +21,19 @@
       </div>
 
       <button id="toggleGameManagement" aria-controls="gameManagement" aria-expanded="false">Manage Games</button>
+      <button id="toggleInstructions" aria-controls="instructions" aria-expanded="false">How to Play</button>
+
+<div id="instructions" class="instructions" role="dialog" aria-hidden="true">
+  <h2>How to Play</h2>
+  <ul>
+    <li><code>look</code> - Look around the current location</li>
+    <li><code>examine [item]</code> - Look at a specific item</li>
+    <li><code>get [item]</code> - Pick up an item</li>
+    <li><code>inventory</code> - Check your inventory</li>
+    <li><code>use [item]</code> - Use an item from your inventory</li>
+    <li><code>go [direction]</code> - Move in a direction (north, south, east, west)</li>
+  </ul>
+</div>
 
       <div id="gameManagement" class="game-management" role="dialog" aria-hidden="true">
         <div class="game-selection">
@@ -46,6 +59,7 @@
 
     <script src="./scripts/game.js" type="module"></script>
     <script src="./scripts/theme-toggle.js"></script>
+    <script src="./scripts/instructions.js"></script>
     <noscript>
       <p>Please enable JavaScript to use this application.</p>
     </noscript>
