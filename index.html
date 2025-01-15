@@ -3,13 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Text-based game application with dynamic dark mode and file upload functionality." />
+    <meta
+      name="description"
+      content="Text-based game application with dynamic dark mode and file upload functionality."
+    />
     <title>Text-based Game</title>
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
 
   <body data-theme="light">
-    <header>
+
+   <div id="app">
+   <header>
       <div class="theme-switch-wrapper">
         <label class="theme-switch" for="theme-checkbox">
           <input type="checkbox" id="theme-checkbox" />
@@ -20,22 +25,47 @@
         </label>
       </div>
 
-      <button id="toggleGameManagement" aria-controls="gameManagement" aria-expanded="false">Manage Games</button>
-      <button id="toggleInstructions" aria-controls="instructions" aria-expanded="false">How to Play</button>
+      <button
+        id="toggleGameManagement"
+        aria-controls="gameManagement"
+        aria-expanded="false"
+      >
+        Manage Games
+      </button>
+      <button
+        id="toggleInstructions"
+        aria-controls="instructions"
+        aria-expanded="false"
+      >
+        How to Play
+      </button>
 
-<div id="instructions" class="instructions" role="dialog" aria-hidden="true">
-  <h2>How to Play</h2>
-  <ul>
-    <li><code>look</code> - Look around the current location</li>
-    <li><code>examine [item]</code> - Look at a specific item</li>
-    <li><code>get [item]</code> - Pick up an item</li>
-    <li><code>inventory</code> - Check your inventory</li>
-    <li><code>use [item]</code> - Use an item from your inventory</li>
-    <li><code>go [direction]</code> - Move in a direction (north, south, east, west)</li>
-  </ul>
-</div>
+      <div
+        id="instructions"
+        class="instructions"
+        role="dialog"
+        aria-hidden="true"
+      >
+        <h2>How to Play</h2>
+        <ul>
+          <li><code>look</code> - Look around the current location</li>
+          <li><code>examine [item]</code> - Look at a specific item</li>
+          <li><code>get [item]</code> - Pick up an item</li>
+          <li><code>inventory</code> - Check your inventory</li>
+          <li><code>use [item]</code> - Use an item from your inventory</li>
+          <li>
+            <code>go [direction]</code> - Move in a direction (north, south,
+            east, west)
+          </li>
+        </ul>
+      </div>
 
-      <div id="gameManagement" class="game-management" role="dialog" aria-hidden="true">
+      <div
+        id="gameManagement"
+        class="game-management"
+        role="dialog"
+        aria-hidden="true"
+      >
         <div class="game-selection">
           <select id="gameSelect" aria-label="Select a game">
             <option value="" disabled selected>Please select a game</option>
@@ -44,18 +74,29 @@
         </div>
         <div class="game-management-divider">OR</div>
         <div class="game-upload">
-          <label for="gameFileInput" id="uploadLabel" class="custom-file-upload">Upload Game File</label>
+          <label for="gameFileInput" id="uploadLabel" class="custom-file-upload"
+            >Upload Game File</label
+          >
           <input type="file" id="gameFileInput" accept=".json" />
           <div id="fileName" role="status" aria-live="polite">Game:</div>
         </div>
       </div>
     </header>
     <main>
-      <textarea id="outputArea" rows="20" cols="60" readonly></textarea>
+      <textarea id="outputArea" rows="18" cols="60" readonly></textarea>
       <label for="inputArea" class="visually-hidden">Enter your action</label>
-      <textarea id="inputArea" rows="2" cols="60" placeholder="Enter an action..." disabled class="disabled"></textarea>
+      <textarea
+        id="inputArea"
+        rows="2"
+        cols="60"
+        placeholder="Enter an action..."
+        disabled
+        class="disabled"
+      ></textarea>
       <button id="sendButton" disabled class="disabled">Send</button>
     </main>
+   </div>
+    
 
     <script src="./scripts/game.js" type="module"></script>
     <script src="./scripts/theme-toggle.js"></script>
