@@ -1,0 +1,51 @@
+{
+  "game": "The Abandoned Office",
+  "locations": {
+    "Reception": {
+      "description": "A dusty reception area with torn wallpaper. An old desk sits in the corner.",
+      "exits": {
+        "east": "Office",
+        "north": "Storage"
+      },
+      "interactables": ["Badge", "Plant"]
+    },
+    "Office": {
+      "description": "A dark office with papers scattered everywhere. A broken window lets in a cold breeze.",
+      "exits": {
+        "west": "Reception",
+        "north": "Storage"
+      },
+      "interactables": ["Laptop", "Papers"]
+    },
+    "Storage": {
+      "description": "A cramped storage room filled with shelves and boxes. The air is stale.",
+      "exits": {
+        "south": "Office",
+        "west": "Reception"
+      },
+      "interactables": ["Flashlight"]
+    }
+  },
+  "interactables": {
+    "Badge": {
+      "textResponse": "An employee ID badge for 'John Smith - Security'",
+      "actionResponse": "You clip the badge to your shirt."
+    },
+    "Plant": {
+      "textResponse": "A withered potted plant. It looks like it hasn't been watered in months."
+    },
+    "Laptop": {
+      "textResponse": "An old laptop covered in dust. The screen is cracked but it might still work.",
+      "actionResponse": "The laptop powers on briefly before dying. The battery is dead."
+    },
+    "Papers": {
+      "textResponse": "Scattered documents about some kind of research project. Most are too faded to read."
+    },
+    "Flashlight": {
+      "textResponse": "A heavy-duty flashlight. It still has some battery life.",
+      "actionResponse": "You turn on the flashlight, illuminating the dark corners of the room."
+    }
+  },
+  "startingLocation": "Reception",
+  "initialMessage": "You find yourself in an abandoned office building. The main lights are out and there's an eerie silence. Maybe you can find some clues about what happened here."
+}

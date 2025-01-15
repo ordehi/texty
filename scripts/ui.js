@@ -1,3 +1,5 @@
+import { gameFilenames } from './config.js';
+
 export function initializeGameSelection(callback) {
   const gameSelect = document.getElementById('gameSelect');
   const loadGameBtn = document.getElementById('loadGameBtn');
@@ -5,6 +7,14 @@ export function initializeGameSelection(callback) {
   const toggleGameManagementBtn = document.getElementById(
     'toggleGameManagement'
   );
+
+  // Define toggle handler function
+  const toggleHandler = (event) => {
+    event.stopPropagation();
+    const isVisible = gameManagement.classList.toggle('visible');
+    gameManagement.setAttribute('aria-hidden', !isVisible);
+    toggleGameManagementBtn.setAttribute('aria-expanded', isVisible);
+  };
 
   // Log for debugging
   console.log('Game management element:', gameManagement);
@@ -15,16 +25,9 @@ export function initializeGameSelection(callback) {
   const newToggleBtn = document.getElementById('toggleGameManagement');
 
   // Add toggle event listener
-  newToggleBtn.addEventListener('click', (event) => {
-    event.stopPropagation(); // Prevent event bubbling
-    const isVisible = gameManagement.classList.toggle('visible');
-    gameManagement.setAttribute('aria-hidden', !isVisible);
-    newToggleBtn.setAttribute('aria-expanded', isVisible);
-    console.log('Toggle clicked, visibility:', isVisible); // Debug log
-  });
+  newToggleBtn.addEventListener('click', toggleHandler);
 
-  // Load games (mock example with filenames for simplicity)
-  const gameFilenames = ['example.json'];
+  // Load games
   (async () => {
     for (const filename of gameFilenames) {
       try {
