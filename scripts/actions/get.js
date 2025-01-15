@@ -10,7 +10,7 @@ function get(params, gameState) {
   if (matchingKey) {
     gameState.inventory.push(currentLocation.interactables[matchingKey]);
     delete currentLocation.interactables[matchingKey];
-    message = `You took the ${matchingKey}.`;
+    message = `You {verb} the ${matchingKey}.`; // Use placeholder for verb
   } else {
     message = `There is no ${params[0]} here.`;
   }

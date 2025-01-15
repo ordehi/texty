@@ -35,14 +35,12 @@ function renderGameState() {
 }
 
 function processInput(action, params, gameState) {
-  // Add the user input to the messageLog
+  const normalizedAction = action.toLowerCase();
   gameState.addMessage(`-> ${action} ${params.join(' ')}`);
-
-  // Execute the action and capture the result
-  const actionFunction = actions[action];
+  const actionFunction = actions[normalizedAction];
 
   if (actionFunction) {
-    const response = actionFunction(params, gameState);
+    const response = actionFunction(params, gameState, action);
     if (response) {
       gameState.addMessage(response);
     }
@@ -71,7 +69,6 @@ function handleInput() {
 
 inputArea.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
-    // Prevent the newline from being added to the textarea
     event.preventDefault();
     handleInput();
   }
@@ -120,12 +117,10 @@ function createLocation(loc) {
 }
 
 function initGameFromJSON(gameData) {
-  // Clear the current game state
   gameState.clear();
   outputArea.value = '';
 
-  // Create and store Interactables
-  const interactableObjects = {}; // Temporary storage to associate interactables with locations
+  const interactableObjects = {};
   for (let itemName in gameData.interactables) {
     const item = { noun: itemName, ...gameData.interactables[itemName] };
     const interactable = createInteractable(item);
