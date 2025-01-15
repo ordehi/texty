@@ -1,14 +1,18 @@
 function get(params, gameState) {
-  const itemKey = params[0];
+  const searchKey = params[0].toLowerCase();
   const currentLocation = gameState.currentLocation;
   let message = '';
 
-  if (currentLocation.interactables[itemKey]) {
-    gameState.inventory.push(currentLocation.interactables[itemKey]);
-    delete currentLocation.interactables[itemKey];
-    message = `You took the ${itemKey}.`;
+  const matchingKey = Object.keys(currentLocation.interactables).find(
+    (key) => key.toLowerCase() === searchKey
+  );
+
+  if (matchingKey) {
+    gameState.inventory.push(currentLocation.interactables[matchingKey]);
+    delete currentLocation.interactables[matchingKey];
+    message = `You took the ${matchingKey}.`;
   } else {
-    message = `There is no ${itemKey} here.`;
+    message = `There is no ${params[0]} here.`;
   }
 
   return message;
